@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="../dist/ng-progress-button-styles.min.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script type="text/javascript" src="../dist/ng-progress-button-styles.min.js"></script>
+        <script type="text/javascript">
+            var mdl = angular.module('app', [
+                'angular-progress-button-styles'
+            ]);
+
+            mdl.controller('MyAppController', function($q, $timeout, $interval) {
+                var vm = this;
+
+                vm.produceErrors = false;
+                vm.promise = null;
+
+                vm.progressFunction = function() {
+                    vm.promise = $q(function(resolve, reject) {
+                        $timeout(function() {
+                            !vm.produceErrors ? resolve() : reject();
+                        }, 1500);
+                    });
+
+                    return vm.promise;
+                };
+
+                vm.progressWithNotify = function() {
+                    var res = $q.defer();
+
+                    var progress = 0;
+                    var interval = $interval(function() {
+                        progress += 0.05;
+                        res.notify(progress);
+                    }, 100);
+                    $timeout(function() {
+                        $interval.cancel(interval);
+                        !vm.produceErrors ? res.resolve() : res.reject();
+                    }, 2000);
+
+                    vm.promise = res.promise;
+
+                    return vm.promise;
+                };
+            });
+        </script>
+        <style type="text/css">
+            body {
+                background: #27ae60;
+                color: #fff;
+                font-family: 'Lato', Arial, sans-serif;
+
+            }
+            .container {
+                width: 1000px;
+                margin: 0 auto;
+            }
+            .wrapper {
+                text-align: justify;
+            }
+            .wrapper + .wrapper {
+                margin-top: 20px;
+            }
+            .wrapper section {
+                display: inline-block;
+            }
+            .wrapper::after {
+                display: inline-block;
+                content: ' ';
+                width: 100%;
+            }
+
+            h2 {
+                font-size: 32px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #148544;
+                font-weight: 700;
+                -webkit-backface-visibility: hidden;
+            }
+            section h2 {
+                text-align: center;
+                font-size: 0.8em;
+                padding: 1em;
+            }
+        </style>
+    </head>
+
+    <body data-ng-app="app" >
+    <div class="container">
+        <h2>Button Styles</h2>
+        <div class="wrapper" style="text-align: center;">
+            <section>
+                <label>
+                    Produce errors when promise completes <input type="checkbox" ng-model="vm.produceErrors">
+                </label>
+            </section>
+        </div>
+        <div class="wrapper">
+            <section data-ng-controller="MyAppController as vm">
+                <h2>fill horizontal</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>fill vertical</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-direction="vertical">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>shrink horizontal</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="shrink">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>shrink vertical</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="shrink" pb-direction="vertical">Submit</button>
+            </section>
+        </div>
+        <div class="wrapper">
+            <section data-ng-controller="MyAppController as vm">
+                <h2>rotate-angle-bottom <br/>perspective</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="rotate-angle-bottom">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>rotate-angle-top <br/>perspective</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="rotate-angle-top">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>rotate-angle-left <br/>perspective</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="rotate-angle-left">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>rotate-angle-right <br/>perspective</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="rotate-angle-right">Submit</button>
+            </section>
+        </div>
+        <div class="wrapper">
+            <section data-ng-controller="MyAppController as vm">
+                <h2>rotate-side-down <br/>perspective</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="rotate-side-down">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>rotate-side-up <br/>perspective</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="rotate-side-up">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>rotate-side-left <br/>perspective</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="rotate-side-left">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>rotate-side-right <br/>perspective</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="rotate-side-right">Submit</button>
+            </section>
+        </div>
+        <div class="wrapper">
+            <section data-ng-controller="MyAppController as vm">
+                <h2>rotate-back <br/>perspective</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="rotate-back">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>flip-open <br/>perspective</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="flip-open">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>slide-down <br/>horizontal</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="slide-down">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>move-up <br/>horizontal</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="move-up">Submit</button>
+            </section>
+        </div>
+        <div class="wrapper">
+            <section data-ng-controller="MyAppController as vm">
+                <h2>top-line <br/>horizontal</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="top-line">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>lateral-lines <br/>vertical</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="lateral-lines">Submit</button>
+            </section>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Configuration types</h2>
+        <div class="wrapper">
+            <section data-ng-controller="MyAppController as vm">
+                <h2>html attributes</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-style="top-line">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <script type="text/javascript">
+                    mdl.config(function(progressButtonConfigProvider) {
+                        progressButtonConfigProvider.profile('testProfile', {
+                            style: 'shrink',
+                            direction: 'vertical'
+                        })
+                    });
+                </script>
+                <h2>javascript</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressFunction()" pb-profile="testProfile">Submit</button>
+            </section>
+            <section data-ng-controller="MyAppController as vm">
+                <h2>promise notify<br/>usage</h2>
+                <button progress-button="vm.promise" data-ng-click="vm.progressWithNotify()" pb-random-progress="false">Submit</button>
+            </section>
+        </div>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "ng-progress-button-styles",
+  "version": "1.0.0",
+  "homepage": "https://redcastor.io",
+  "authors": [
+    "Auban le Grelle"
+  ],
+  "description": "",
+  "keywords": [
+    "angular",
+    "progress-button-styles",
+    "angularjs",
+    "directive",
+    "progress",
+    "button",
+    "style"
+  ],
+  "main": [
+    "dist/ng-progress-button-styles.js",
+    "dist/ng-progress-button-styles.css"
+  ],
+  "ignore": [
+    "**/.*",
+    "**/*.txt",
+    ".jscsrc",
+    ".jshintrc",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "~1.5.x"
+  }
+}
