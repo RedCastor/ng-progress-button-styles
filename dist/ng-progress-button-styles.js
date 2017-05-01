@@ -46,7 +46,7 @@
             };
         };
     }
-    function ProgressButton($q, progressButtonConfig, $interval) {
+    function ProgressButton($q, ngProgressButtonConfig, $interval) {
         return {
             restrict: "A",
             transclude: true,
@@ -54,13 +54,13 @@
                 pbStyle: "@",
                 pbDirection: "@",
                 pbProfile: "@",
-                progressButton: "="
+                ngProgressButton: "="
             },
             template: '<span class="content" ng-transclude></span>' + '<span class="progress">' + '<span class="progress-inner" ng-style="progressStyles" ng-class="{ notransition: !allowProgressTransition }"></span>' + "</span>",
             controller: function() {},
             link: function($scope, $element, $attrs) {
                 function _configure() {
-                    var profile = progressButtonConfig.getProfile($scope.pbProfile);
+                    var profile = ngProgressButtonConfig.getProfile($scope.pbProfile);
                     $scope.pbStyle = $scope.pbStyle || profile.style || "fill";
                     if ($scope.pbStyle !== "lateral-lines") {
                         $scope.pbDirection = $scope.pbDirection || profile.direction || "horizontal";
@@ -131,7 +131,7 @@
                 $scope.$watch("disabled", function(newValue) {
                     $element.toggleClass("disabled", newValue);
                 });
-                $scope.$watch("progressButton", function(newValue, oldValue) {
+                $scope.$watch("ngProgressButton", function(newValue, oldValue) {
                     if (newValue !== oldValue) {
                         if ($scope.disabled) {
                             return;
@@ -164,9 +164,9 @@
             }
         };
     }
-    var mdl = angular.module("angular-progress-button-styles", []);
-    mdl.provider("progressButtonConfig", ProgressButtonConfig);
-    mdl.directive("progressButton", ProgressButton);
-    ProgressButton.$inject = [ "$q", "progressButtonConfig", "$interval" ];
+    var mdl = angular.module("ngProgressButtonStyles", []);
+    mdl.provider("ngProgressButtonConfig", ProgressButtonConfig);
+    mdl.directive("ngProgressButton", ProgressButton);
+    ProgressButton.$inject = [ "$q", "ngProgressButtonConfig", "$interval" ];
 })(angular);
 //# sourceMappingURL=ng-progress-button-styles.js.map

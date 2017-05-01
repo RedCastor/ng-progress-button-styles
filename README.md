@@ -27,7 +27,7 @@ var app = angular.module('app', ['ng-progress-button-styles']);
 ```
 Add directive to the button element!
 ```html
-<button progress-button="promise" data-ng-click="someFunction()">Submit</button>
+<button ng-progress-button="promise" data-ng-click="someFunction()">Submit</button>
 ```
 
 That's it! Enjoy the plugin!
@@ -51,10 +51,10 @@ Here is a list of supported HTML attributes and their meaning:
  
 ##### Javascript configuration
 For those ones, who don't like to have a lot of configuration in HTML as well to prevent the copy-paste there also is possibility to define configuration in Javascript using profiles.
-To do this, you need to inject `progressButtonConfigProvider` during the app configuration:
+To do this, you need to inject `ngProgressButtonConfigProvider` during the app configuration:
 ```javascript
-mdl.config(function(progressButtonConfigProvider) {
-  progressButtonConfigProvider.profile('testProfile', {
+mdl.config(function(ngProgressButtonConfigProvider) {
+  ngProgressButtonConfigProvider.profile('testProfile', {
     style: 'shrink',
     direction: 'vertical'
   });
@@ -62,13 +62,13 @@ mdl.config(function(progressButtonConfigProvider) {
 ```
 In this example new profile called 'testProfile' created. You can then apply it to you button like this:
 ```html
-<button progress-button="promise" data-ng-click="someFunction()" pb-profile="testProfile">Submit</button>
+<button ng-progress-button="promise" data-ng-click="someFunction()" pb-profile="testProfile">Submit</button>
 ```
 This would create new button with style _shrink_ and _vertical_ direction.
 
 You can as well define <b>default profile</b>, that will be applied to all the buttons across your application:
 ```javascript
-progressButtonConfigProvider.profile({
+ngProgressButtonConfigProvider.profile({
   style: 'shrink',
   direction: 'vertical'
 });

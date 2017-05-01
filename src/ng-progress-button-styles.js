@@ -54,7 +54,7 @@
         };
     }
 
-    function ProgressButton($q, progressButtonConfig, $interval) {
+    function ProgressButton($q, ngProgressButtonConfig, $interval) {
         return {
             restrict: 'A',
             transclude: true,
@@ -62,7 +62,7 @@
                 pbStyle: '@',
                 pbDirection: '@',
                 pbProfile: '@',
-                progressButton: '='
+                ngProgressButton: '='
             },
             template: '<span class="content" ng-transclude></span>' +
             '<span class="progress">' +
@@ -72,7 +72,7 @@
             link: function($scope, $element, $attrs) {
 
                 function _configure() {
-                    var profile = progressButtonConfig.getProfile($scope.pbProfile);
+                    var profile = ngProgressButtonConfig.getProfile($scope.pbProfile);
 
                     $scope.pbStyle = $scope.pbStyle || profile.style || 'fill';
                     if ($scope.pbStyle !== 'lateral-lines') {
@@ -164,7 +164,7 @@
                 });
 
 
-                $scope.$watch('progressButton', function(newValue, oldValue) {
+                $scope.$watch('ngProgressButton', function(newValue, oldValue) {
 
                     if ( newValue !== oldValue ) {
 
@@ -207,12 +207,12 @@
         };
     }
 
-    var mdl = angular.module('angular-progress-button-styles', []);
+    var mdl = angular.module('ngProgressButtonStyles', []);
 
-    mdl.provider('progressButtonConfig', ProgressButtonConfig);
+    mdl.provider('ngProgressButtonConfig', ProgressButtonConfig);
 
-    mdl.directive('progressButton', ProgressButton);
+    mdl.directive('ngProgressButton', ProgressButton);
 
-    ProgressButton.$inject = ['$q', 'progressButtonConfig', '$interval'];
+    ProgressButton.$inject = ['$q', 'ngProgressButtonConfig', '$interval'];
 
 })(angular);
